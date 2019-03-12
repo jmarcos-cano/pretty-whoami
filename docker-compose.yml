@@ -1,0 +1,54 @@
+version: "3.5"
+services:
+  web:
+    image: ${IMAGE_NAME:-mcano/pretty-whoami}
+    environment:
+      - REDIS_HOST=redis
+      - DOCKER_SERVICE_NAME={{.Service.Name}}.{{.Task.Slot}}
+      - FOO=${FOO:-BAR}
+    ports:
+      - target: 5000
+        published: 5000
+    networks:
+      - skynet
+    # adds self-healing availability
+    healthcheck:
+      test: wget -O- http://localhost:5000/healthz
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+
+    deploy:
+      replicas: ${DEPLOYMENT_REPLICAS:-3}
+      restart_policy:
+        # restart under any condition
+        condition: any
+      update_config:
+        # update one task at a time
+        parallelism: 1
+        # update after 10s passed and task ainer is healthy
+        delay: 10s
+        # spin up a new container first
+        order: start-first
+      resources:
+        # hard limits
+        limits:
+          # 50% of CPU time
+          cpus: '0.50'
+          # up to 200 MB
+          memory: 200M
+        # at least reserve this resources
+        reservations:
+          cpus: '0.25'
+          memory: 10M
+
+  redis:
+    image: "redis:alpine"
+    deploy:
+      replicas: 1
+    networks:
+      skynet:
+
+networks:
+  skynet:
