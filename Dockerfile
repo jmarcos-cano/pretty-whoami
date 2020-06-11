@@ -1,7 +1,15 @@
-FROM python:3.4-alpine
-ADD . /code
-WORKDIR /code
+FROM python:3.7-alpine
+WORKDIR /app
+
+ENV DEBUG=False
+
+ADD requirements.txt .
+
 RUN pip install -r requirements.txt
-CMD ["python", "app.py"]
+
+COPY . ./
+ENTRYPOINT [ "python" ]
+CMD [ "server.py"]
+
 
 EXPOSE 5000

@@ -20,8 +20,9 @@
         box-shadow: 5px 5px 5px 0 rgba(54,56,109,0.3) ;
         text-shadow: 3px 3px 3px rgba(0,0,0,0.2) ;
         position: absolute; /* or absolute */
-        top: 40%;
+        top: 20%;
         left: 35%;
+        bottom: auto;
         }
     .img {
         position: fixed; /* or absolute */
@@ -34,10 +35,13 @@
    <body>
       <div class="enjoy-css">
           <br>
+          <img class="center" src="static/img/bolt.png" width="35%" class="" >
+          <br>
+          "{{quote}}"
+          <br>
+          <br>
           Hostname: {{hostname}}
           <br>
-          Task: {{DOCKER_SERVICE_NAME}}
-          <br>
-          FOO: {{FOO}}
+
       </div>
    </body>

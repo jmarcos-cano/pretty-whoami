@@ -1,7 +1,8 @@
 version: "3.5"
 services:
   web:
-    image: ${IMAGE_NAME:-mcano/pretty-whoami}
+    image: ${IMAGE_NAME:-mcano/future-is-now:0.1.0}
+    build: .
     environment:
       - REDIS_HOST=redis
       - DOCKER_SERVICE_NAME={{.Service.Name}}.{{.Task.Slot}}
@@ -45,6 +46,8 @@ services:
 
   redis:
     image: "redis:alpine"
+    ports:
+      - 6379:6379
     deploy:
       replicas: 1
     networks:
