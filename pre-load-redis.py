@@ -6,7 +6,7 @@ r = redis.Redis(
     port=6379)
 
 
-def load_quotes():
+def load_quotes_api():
     limit=10
     ran= random.randint(0,limit-1)
     PAPERQUOTES_API_ENDPOINT = f'http://api.paperquotes.com/apiv1/quotes?tags=love&limit={limit}'
@@ -25,9 +25,17 @@ def load_quotes():
         quote=""
     return quote
 
+def load_quotes_file():
+    with open("moviequotes/quotes.txt","r") as file:
+        lines=file.readlines()
+        index=1
+        for line in lines:
+            line=line.rstrip().strip('"')
+            r.set(index,line)
+            index+=1
 
-load_quotes()
 
-r.set('foo', 'bar')
-value = r.get('1')
-print(value)
+load_quotes_file()
+#r.set('foo', 'bar')
+#value = r.get('1')
+print("Succesfully Loaded all quotes")
