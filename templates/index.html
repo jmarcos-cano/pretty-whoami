@@ -19,7 +19,7 @@
         -webkit-box-shadow: 5px 5px 5px 0 rgba(54,56,109,0.3) ;
         box-shadow: 5px 5px 5px 0 rgba(54,56,109,0.3) ;
         text-shadow: 3px 3px 3px rgba(0,0,0,0.2) ;
-        position: absolute; /* or absolute */
+        position: relative; /* or absolute */
         top: 20%;
         left: 35%;
         bottom: auto;
@@ -29,11 +29,12 @@
         left: 34%;
     }
     </style>
-<!--     <header>
-        <img class="img" src="https://lh3.googleusercontent.com/-hJ2rXeGXaF4/Wql_QzNTb3I/AAAAAAAAb7o/tt92qpBuFkc5uaLLi5lXkC-dQA-ivKdAQCJoC/w1920-h1080/google_io_2018_extended_hashtag_white_16x9_rgb.png" width="487" height="274" >
-    </header> -->
+
    <body>
       <div class="enjoy-css">
+          {% if time %}
+          <span style="float:right;font-size: 20px ;">{{time}}</span>
+          {% endif %}
           <br>
           <img class="center" src="static/img/bolt.png" width="35%" class="" >
           <br>

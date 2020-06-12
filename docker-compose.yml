@@ -11,7 +11,7 @@ services:
       - target: 5000
         published: 5000
     networks:
-      - skynet
+      - net
     # adds self-healing availability
     healthcheck:
       test: wget -O- http://localhost:5000/healthz
@@ -44,14 +44,14 @@ services:
           cpus: '0.25'
           memory: 10M
 
-  redis:
-    image: "redis:alpine"
-    ports:
-      - 6379:6379
-    deploy:
-      replicas: 1
-    networks:
-      skynet:
+  # redis:
+  #   image: "redis:alpine"
+  #   ports:
+  #     - 6379:6379
+  #   deploy:
+  #     replicas: 1
+  #   networks:
+  #     net:
 
 networks:
-  skynet:
+  net:

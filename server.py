@@ -1,6 +1,9 @@
 import  os, time, platform, requests, json, random
 from flask import Flask
 from flask import Flask, render_template
+from datetime import date
+
+today = date.today()
 
 app = Flask(__name__)
 
@@ -22,7 +25,8 @@ def get_quote():
 def hello():
     host=platform.node()
     extra=os.getenv("EXTRA","")
-    return render_template('index.html', hostname=host, quote=get_quote(), extra=extra)
+    time=os.getenv("TIME",today)
+    return render_template('index.html', hostname=host, quote=get_quote(), extra=extra,time=time)
 
 @app.route('/health')
 def health():
