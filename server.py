@@ -1,6 +1,8 @@
 import  os, time, platform, requests, json, random
 from flask import Flask
 from flask import Flask, render_template
+from flask import jsonify
+
 from datetime import date
 
 today = date.today()
@@ -42,9 +44,9 @@ def hello():
     extra=os.getenv("EXTRA","")
     time=os.getenv("JUMP_DATE",today)
     time=str(time)
-    if "1985" in time:
+    if "198" in time:
         return render_template('1985_index.html', hostname=host, quote=get_quote_file(quote_text_file), extra=extra,time=time)
-    elif "1955" in time:
+    elif "195" in time:
         return render_template('1955_index.html', hostname=host, quote=get_quote_file(quote_text_file), extra=extra,time=time)
     else:
         return render_template('index.html', hostname=host, quote=get_quote_file(quote_text_file), extra=extra,time=time)
@@ -52,6 +54,13 @@ def hello():
 @app.route('/health')
 def health():
     return "Im healthy"
+
+@app.route('/version')
+def version():
+    version={"version": os.getenv("VERSION","1.0.0")}
+
+    return jsonify(version)
+
 
 if __name__ == "__main__":
     debug=os.getenv("DEBUG", True)
