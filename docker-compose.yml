@@ -11,7 +11,7 @@ services:
       - target: 5000
         published: 5000
     networks:
-      - net
+      - skynet
     # adds self-healing availability
     healthcheck:
       test: wget -O- http://localhost:5000/healthz
@@ -51,7 +51,7 @@ services:
   #   deploy:
   #     replicas: 1
   #   networks:
-  #     net:
+  #     skynet:
 
 networks:
-  net:
+  skynet:

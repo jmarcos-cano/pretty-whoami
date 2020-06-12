@@ -26,7 +26,7 @@ def hello():
     host=platform.node()
     extra=os.getenv("EXTRA","")
     time=os.getenv("TIME",today)
-    return render_template('index.html', hostname=host, quote=get_quote(), extra=extra,time=time)
+    return render_template('1985_index.html', hostname=host, quote=get_quote(), extra=extra,time=time)
 
 @app.route('/health')
 def health():
