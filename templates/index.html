@@ -36,12 +36,15 @@
           <span style="float:right;font-size: 20px ;">{{time}}</span>
           {% endif %}
           <br>
-          <img class="center" src="static/img/bolt.png" width="35%" class="" >
+          <img class="center" src="static/img/bolt.png" width="35%"  >
           <br>
           "{{quote}}"
           <br>
           TimeMachine: {{hostname}}
           <br>
+          {% if flux %}
+          <img class="center" src="static/img/flux.png" width="15%"  >
+          {% endif %}
 
       </div>
    </body>

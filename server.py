@@ -43,13 +43,14 @@ def hello():
     host=platform.node()
     extra=os.getenv("EXTRA","")
     time=os.getenv("JUMP_DATE",today)
+    flux=os.getenv("FLUX_ENABLED", False)
     time=str(time)
     if "198" in time:
-        return render_template('1985_index.html', hostname=host, quote=get_quote_file(quote_text_file), extra=extra,time=time)
+        return render_template('1985_index.html', hostname=host, quote=get_quote_file(quote_text_file), extra=extra,time=time, flux=flux)
     elif "195" in time:
-        return render_template('1955_index.html', hostname=host, quote=get_quote_file(quote_text_file), extra=extra,time=time)
+        return render_template('1955_index.html', hostname=host, quote=get_quote_file(quote_text_file), extra=extra,time=time, flux=flux)
     else:
-        return render_template('index.html', hostname=host, quote=get_quote_file(quote_text_file), extra=extra,time=time)
+        return render_template('index.html', hostname=host, quote=get_quote_file(quote_text_file), extra=extra,time=time, flux=flux)
 
 @app.route('/health')
 def health():
@@ -58,7 +59,6 @@ def health():
 @app.route('/version')
 def version():
     version={"version": os.getenv("VERSION","1.0.0")}
-
     return jsonify(version)
 
 
