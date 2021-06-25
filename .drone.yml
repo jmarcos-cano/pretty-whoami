@@ -1,0 +1,8 @@
+kind: pipeline
+name: default
+steps:
+- name: build
+  image: plugins/docker
+  settings:
+   repo: mcano/drone-whoami
+   tags: [ "${DRONE_COMMIT_SHA:0:7}","latest" ]
